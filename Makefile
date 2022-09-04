@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 15:36:46 by libacchu          #+#    #+#              #
-#    Updated: 2022/09/03 19:22:30 by libacchu         ###   ########.fr        #
+#    Updated: 2022/09/04 22:12:02 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,13 @@ CFLAGS	= 	-Wall -Wextra -Wextra -pthread -g
 
 SRC_DIR	= 	./src
 SRC		= 	$(SRC_DIR)/main.c \
-			$(SRC_DIR)/utils.c \
+			$(SRC_DIR)/input_handler.c \
+			$(SRC_DIR)/init_struct.c \
 			$(SRC_DIR)/get_time.c \
 			$(SRC_DIR)/sleep.c \
+			$(SRC_DIR)/utils.c \
+			$(SRC_DIR)/print_msg.c \
+			$(SRC_DIR)/threads.c \
 
 OBJ		= 	$(SRC:%.c=%.o)
 
