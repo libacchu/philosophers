@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:40:21 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/04 23:08:36 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:52:21 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	}
 	table = init_program(ac, av);
 	philos = init_philos(table);
-	int_background(table);
+	init_background(table);
 	init_threads(table, philos);
 
 	free(table);

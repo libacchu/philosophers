@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 12:48:22 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/04 22:58:31 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/09/08 22:28:07 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 
 # define INVALID_INPUT 1
 
+typedef struct s_fork
+{
+	int				id;
+	int				status;
+	pthread_mutex_t	m_fork;
+}	t_fork;
+
 typedef struct s_program
 {
 	int				nbr_of_philos;
@@ -34,6 +41,7 @@ typedef struct s_program
 	pthread_mutex_t	m_supervisor;
 	pthread_t		*thread;
 	pthread_t		thread_background;
+	t_fork			*fork;
 }	t_program;
 
 typedef struct s_philo
@@ -41,7 +49,6 @@ typedef struct s_philo
 	int				index;
 	int				last_meal;
 	int				fork;
-	pthread_mutex_t	m_fork;
 	t_program		*table;
 }	t_philo;
 
@@ -69,7 +76,11 @@ int			ft_isdigit(int c);
 void		print_msg(time_t time, int philo_id, char *msg);
 
 /*	threads.c	*/
-void		init_threads(t_program *table, t_philo *philos);
+int			init_threads(t_program *table, t_philo *philos);
 void		*routine(void *arg);
+
+/*	background_threads.c	*/
+void		init_background(t_program *table);
+void		*bg_function(void *table);
 
 #endif
