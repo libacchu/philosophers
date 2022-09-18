@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 12:48:22 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/08 22:28:07 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/09/18 09:19:46 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include <sys/time.h>
 
 # define INVALID_INPUT 1
+# define FORK 11
+# define EATING 12
+# define SLEEPING 13
+# define THINKING 14
+# define DIED 15
 
 typedef struct s_fork
 {
@@ -48,9 +53,12 @@ typedef struct s_philo
 {
 	int				index;
 	int				last_meal;
-	int				fork;
+	int				nbr_times_eaten;
+	t_fork			*right_fork;
+	t_fork			*left_fork;
 	t_program		*table;
 }	t_philo;
+
 
 /*	init_struct.c	*/
 t_program	*init_program(int ac, char **av);
@@ -69,11 +77,13 @@ time_t		get_time_in_ms(void);
 void		philo_sleep(t_program *table, time_t amt_time_to_sleep);
 
 /*	Utils.c	*/
-int			ft_atoi(const char *str);
+long		ft_atoi(const char *str);
 int			ft_isdigit(int c);
+int			ft_check_overflow(char *av);
+size_t		ft_strlen(const char *str);
 
 /*	print_msg.c	*/
-void		print_msg(time_t time, int philo_id, char *msg);
+void		print_msg(time_t start_time, int philo_id, int state_change);
 
 /*	threads.c	*/
 int			init_threads(t_program *table, t_philo *philos);

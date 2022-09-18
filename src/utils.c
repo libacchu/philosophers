@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:56:05 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/02 16:17:28 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/09/18 09:19:07 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	ft_isdigit(int c)
 **	The atoi() function converts the initial portion of
 		the string pointed to by str to int representation.
 */
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	sign;
-	int	num;
+	int		sign;
+	long	num;
 
 	while (*str <= 32)
 		str++;
@@ -51,4 +51,36 @@ int	ft_atoi(const char *str)
 		str++;
 	}
 	return (num * sign);
+}
+
+int	ft_check_overflow(char *av)
+{
+	long long	num;
+
+	if (ft_strlen(av) > 11)
+		return (EXIT_FAILURE);
+	num = ft_atoi(av);
+	if (num < -2147483648 || num > 2147483647)
+		return (EXIT_FAILURE);
+	return (0);
+}
+
+/*
+ The strlen() function computes the length of the string s.  The strnlen()
+     function attempts to compute the length of s, but never scans beyond the
+     first maxlen bytes of s.
+The strlen() function returns the number of characters that precede the ter-
+     minating NUL character.
+*/
+size_t	ft_strlen(const char *str)
+{
+	size_t	count;
+
+	count = 0;
+	while (*str)
+	{
+		str++;
+		count++;
+	}
+	return (count);
 }
