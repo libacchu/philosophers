@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 15:40:21 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/16 12:51:31 by libacchu         ###   ########.fr       */
+/*   Created: 2022/09/16 12:12:10 by libacchu          #+#    #+#             */
+/*   Updated: 2022/09/16 12:57:19 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(int ac, char **av)
+void	*routine(void *arg)
 {
-	t_program	*table;
-	t_philo		*philos;
+	t_philo	*philo;
+	int		i;
 
-	if (input_handler(ac, av))
+	i = 0;
+	philo = (t_philo *)arg;
+	philo->last_meal = philo->table->start_time;
+	if (philo->index % 2)
+		philo_think()
+	while (i < 200)
 	{
-		write(1, "Invalid argument.\n", 18);
-		return (INVALID_INPUT);
+		pthread_mutex_lock(&philo->table->m_print_msg);
+		print_msg((get_time_in_ms() - philo->table->start_time), \
+					philo->index, "hello\n");
+		pthread_mutex_unlock(&philo->table->m_print_msg);
+		i++;
+		usleep (99);
 	}
-	table = init_program(ac, av);
-	philos = init_philos(table);
-	init_background(table);
-	init_threads(table, philos);
-
-	free(table);
-	return (0);
+	return ((void *)philo);
 }

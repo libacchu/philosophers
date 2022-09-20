@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:17:11 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/04 20:23:05 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/09/17 09:07:41 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	input_handler(int ac, char **av)
 		return (INVALID_INPUT);
 	if (check_if_input_are_digits(ac, av) != 0)
 		return (INVALID_INPUT);
+	if (check_overflow(ac, av))
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:18:26 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/04 22:56:13 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/09/12 12:47:55 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_program	*init_program(int ac, char **av)
 	t_program	*table;
 
 	table = malloc(sizeof(t_program));
+	if (!table)
+		return (EXIT_FAILURE);
 	table->nbr_of_philos = ft_atoi(av[1]);
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
@@ -26,6 +28,9 @@ t_program	*init_program(int ac, char **av)
 	else
 		table->nbr_of_times_to_eat = 0;
 	table->did_philo_die = 0;
+	table->fork = malloc(sizeof(t_fork) * table->nbr_of_philos);
+	if (!table->fork)
+		return (EXIT_FAILURE);
 	return (table);
 }
 

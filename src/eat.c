@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   eat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 15:40:21 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/16 12:51:31 by libacchu         ###   ########.fr       */
+/*   Created: 2022/09/12 12:50:01 by libacchu          #+#    #+#             */
+/*   Updated: 2022/09/13 20:43:41 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(int ac, char **av)
+void	philo_eat(t_program *table, time_t amt_time_to_eat)
 {
-	t_program	*table;
-	t_philo		*philos;
+	time_t	time_to_stop;
 
-	if (input_handler(ac, av))
+	(void)table;
+	time_to_stop = get_time_in_ms() + amt_time_to_eat;
+	while (get_time_in_ms() < time_to_stop)
 	{
-		write(1, "Invalid argument.\n", 18);
-		return (INVALID_INPUT);
+		if (table->did_philo_die)
+			break ;
+		usleep(50);
 	}
-	table = init_program(ac, av);
-	philos = init_philos(table);
-	init_background(table);
-	init_threads(table, philos);
-
-	free(table);
-	return (0);
 }
