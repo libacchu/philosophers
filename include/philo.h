@@ -97,7 +97,7 @@ void		print_msg(time_t start_time, int philo_id, \
 			int state_change, t_program *table);
 
 /*	threads.c	*/
-int			init_threads(t_program *table, t_philo *philos);
+int			run_program(t_program *table, t_philo *philos);
 void		*routine(void *arg);
 int			create_threads(t_program *table, t_philo *philos);
 int			join_threads(t_program *table);
