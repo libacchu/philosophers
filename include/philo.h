@@ -26,6 +26,8 @@
 # define THINKING 14
 # define DIED 15
 
+typedef struct s_philo	t_philo;
+
 typedef struct s_fork
 {
 	int				id;
@@ -42,11 +44,11 @@ typedef struct s_program
 	int				nbr_of_times_to_eat;
 	int				did_philo_die;
 	time_t			start_time;
-	pthread_mutex_t	m_print_msg;
-	pthread_mutex_t	m_supervisor;
-	pthread_t		*thread;
 	pthread_t		thread_background;
-	t_fork			*fork;
+	pthread_t		*thread;
+	t_philo			*philos;
+	t_fork			*forks;
+	pthread_mutex_t	m_print_msg;
 }	t_program;
 
 typedef struct s_philo
@@ -59,11 +61,11 @@ typedef struct s_philo
 	t_program		*table;
 }	t_philo;
 
-
 /*	init_struct.c	*/
 t_program	*init_program(int ac, char **av);
 t_philo		*init_philos(t_program *table);
 t_philo		populate_one_philo(int index, t_program *table);
+t_fork		*init_forks(t_program *table);
 
 /*	input_handler.c	*/
 int			input_handler(int ac, char **av);
@@ -74,20 +76,31 @@ int			check_if_input_are_digits(int ac, char **av);
 time_t		get_time_in_ms(void);
 
 /*	sleep.c */
-void		philo_sleep(t_program *table, time_t amt_time_to_sleep);
+int			philo_sleep(t_philo *philo, t_program *table);
+
+/*	think.c */
+int			philo_think(t_program *table, t_philo *philo);
+
+/*	eat.c */
+int			philo_eat(t_philo *philo, time_t amt_time_to_eat);
+void		philo_takes_forks(t_philo *philo);
+void		philo_drops_forks(t_philo *philo);
 
 /*	Utils.c	*/
 long		ft_atoi(const char *str);
 int			ft_isdigit(int c);
-int			ft_check_overflow(char *av);
+int			ft_check_overflow(int ac, char **av);
 size_t		ft_strlen(const char *str);
 
 /*	print_msg.c	*/
-void		print_msg(time_t start_time, int philo_id, int state_change);
+void		print_msg(time_t start_time, int philo_id, \
+			int state_change, t_program *table);
 
 /*	threads.c	*/
 int			init_threads(t_program *table, t_philo *philos);
 void		*routine(void *arg);
+int			create_threads(t_program *table, t_philo *philos);
+int			join_threads(t_program *table);
 
 /*	background_threads.c	*/
 void		init_background(t_program *table);

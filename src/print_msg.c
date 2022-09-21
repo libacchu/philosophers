@@ -12,19 +12,24 @@
 
 #include "../include/philo.h"
 
-void	print_msg(time_t start_time, int philo_id, int state_change)
+void	print_msg(time_t start_time, int philo_id, \
+			int state_change, t_program *table)
 {
 	time_t	current_time;
 
 	current_time = get_time_in_ms() - start_time;
-	if (state_change == FORK)
-		printf("%lu %d has taken a fork\n", current_time, philo_id);
-	if (state_change == EATING)
-		printf("%lu %d is eating\n", current_time, philo_id);
-	if (state_change == SLEEPING)
-		printf("%lu %d is sleeping\n", current_time, philo_id);
-	if (state_change == THINKING)
-		printf("%lu %d is thinking\n", current_time, philo_id);
+	if (table->did_philo_die == 0)
+	{
+		if (state_change == FORK)
+			printf("%lu %d has taken a fork\n", current_time, philo_id);
+		if (state_change == EATING)
+			printf("%lu %d is eating\n", current_time, philo_id);
+		if (state_change == SLEEPING)
+			printf("%lu %d is sleeping\n", current_time, philo_id);
+		if (state_change == THINKING)
+			printf("%lu %d is thinking\n", current_time, philo_id);
+	}
 	if (state_change == DIED)
-		printf("%lu %d died\n", time, philo_id);
+		printf("%lu %d died\n", current_time, philo_id);
 }
+

@@ -42,13 +42,21 @@ int	join_threads(t_program *table)
 
 int	init_threads(t_program *table, t_philo *philos)
 {
-	table->start_time = get_time_in_ms();
+	table->start_time = get_time_in_ms() + (table->nbr_of_philos * 20);
+	// printf("current time = %lu\nstart time = %lu\n", get_time_in_ms(), table->start_time);
 	table->thread = malloc(sizeof(pthread_t) * table->nbr_of_philos);
 	pthread_mutex_init(&table->m_print_msg, NULL);
 	if (create_threads(table, philos))
 		return (EXIT_FAILURE);
+	init_background(table);
 	if (join_threads(table))
 		return (EXIT_FAILURE);
-	pthread_mutex_destroy(&table->m_print_msg);
 	return (0);
 }
+
+// int	end_program(t_program *table, t_philo *philos)
+// {
+// 	if (join_threads(table))
+// 		return (EXIT_FAILURE);
+// 	pthread_mutex_destroy(&table->m_print_msg);
+// }

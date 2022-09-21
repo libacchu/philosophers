@@ -15,18 +15,17 @@
 int	main(int ac, char **av)
 {
 	t_program	*table;
-	t_philo		*philos;
+	// t_philo		*philos;
 
 	if (input_handler(ac, av))
-	{
-		write(1, "Invalid argument.\n", 18);
-		return (INVALID_INPUT);
-	}
+		return (EXIT_FAILURE);
 	table = init_program(ac, av);
-	philos = init_philos(table);
-	init_background(table);
-	init_threads(table, philos);
+	(void)table;
+	table->philos = init_philos(table);
+	// init_background(table);
+	init_threads(table, table->philos);
+	// end_program(table, philos);
 
-	free(table);
+	// free(table);
 	return (0);
 }

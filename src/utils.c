@@ -53,15 +53,21 @@ long	ft_atoi(const char *str)
 	return (num * sign);
 }
 
-int	ft_check_overflow(char *av)
+int	ft_check_overflow(int ac, char **av)
 {
 	long long	num;
+	int			i;
 
-	if (ft_strlen(av) > 11)
-		return (EXIT_FAILURE);
-	num = ft_atoi(av);
-	if (num < -2147483648 || num > 2147483647)
-		return (EXIT_FAILURE);
+	i = 1;
+	while (i < ac)
+	{	
+		if (ft_strlen(av[i]) > 11)
+			return (EXIT_FAILURE);
+		num = ft_atoi(av[i]);
+		if (num < -2147483648 || num > 2147483647)
+			return (EXIT_FAILURE);
+		i++;
+	}
 	return (0);
 }
 

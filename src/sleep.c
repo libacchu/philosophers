@@ -12,16 +12,19 @@
 
 #include "../include/philo.h"
 
-void	philo_sleep(t_program *table, time_t amt_time_to_sleep)
+int	philo_sleep(t_philo *philo, t_program *table)
 {
-	time_t	time_to_wake;
+	time_t	time_to_wake_up;
 
-	(void)table;
-	time_to_wake = get_time_in_ms() + amt_time_to_sleep;
-	while (get_time_in_ms() < time_to_wake)
+	time_to_wake_up = get_time_in_ms() + table->time_to_sleep;
+	if (table->did_philo_die != 0)
+		return (1);
+	print_msg(table->start_time, philo->index, SLEEPING, table);
+	while (get_time_in_ms() < time_to_wake_up)
 	{
 		if (table->did_philo_die)
 			break ;
 		usleep(50);
 	}
+	return (0);
 }

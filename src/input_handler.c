@@ -15,10 +15,20 @@
 int	input_handler(int ac, char **av)
 {
 	if (amt_of_args(ac) != 0)
-		return (INVALID_INPUT);
+	{
+		printf("Invalid amount of arguments.\n");
+		return (EXIT_FAILURE);
+	}
 	if (check_if_input_are_digits(ac, av) != 0)
-		return (INVALID_INPUT);
-	if (check_overflow(ac, av))
+	{
+		printf("Invalid argument.\n");
+		return (EXIT_FAILURE);
+	}
+	if (ft_check_overflow(ac, av))
+	{
+		printf("Invalid integer.\n");
+		return (EXIT_FAILURE);
+	}
 	return (0);
 }
 
@@ -41,7 +51,7 @@ int	check_if_input_are_digits(int ac, char **av)
 		while (av[i][j])
 		{
 			if (ft_isdigit(av[i][j]) == 0)
-				return (INVALID_INPUT);
+				return (EXIT_FAILURE);
 			j++;
 		}
 		i++;

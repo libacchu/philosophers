@@ -18,7 +18,7 @@ t_program	*init_program(int ac, char **av)
 
 	table = malloc(sizeof(t_program));
 	if (!table)
-		return (EXIT_FAILURE);
+		return (NULL);
 	table->nbr_of_philos = ft_atoi(av[1]);
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
@@ -26,12 +26,29 @@ t_program	*init_program(int ac, char **av)
 	if (ac == 6)
 		table->nbr_of_times_to_eat = ft_atoi(av[5]);
 	else
-		table->nbr_of_times_to_eat = 0;
+		table->nbr_of_times_to_eat = -1;
 	table->did_philo_die = 0;
-	table->fork = malloc(sizeof(t_fork) * table->nbr_of_philos);
-	if (!table->fork)
-		return (EXIT_FAILURE);
+	table->forks = init_forks(table);
 	return (table);
+}
+
+t_fork	*init_forks(t_program *table)
+{
+	t_fork	*forks;
+	int		i;
+
+	forks = malloc(sizeof(t_fork) * table->nbr_of_philos);
+	if (!forks)
+		return (NULL);
+	i = 0;
+	while (i < table->nbr_of_philos)
+	{
+		forks[i].id = i;
+		forks[i].status = 0;
+		pthread_mutex_init(&forks[i].m_fork, NULL);
+		i++;
+	}
+	return (forks);
 }
 
 t_philo	*init_philos(t_program *table)
@@ -57,8 +74,9 @@ t_philo	populate_one_philo(int index, t_program *table)
 
 	philo.index = index;
 	philo.table = table;
-	philo.last_meal = (get_time_in_ms() - table->start_time) + \
-		table->time_to_die;
-	pthread_mutex_init(&philo.m_fork, NULL);
+	philo.last_meal = 0;
+	philo.nbr_times_eaten = 0;
+	philo.right_fork = &table->forks[index - 1];
+	philo.left_fork = &table->forks[index % table->nbr_of_philos];
 	return (philo);
 }

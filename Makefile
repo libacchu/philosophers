@@ -25,6 +25,9 @@ SRC		= 	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/print_msg.c \
 			$(SRC_DIR)/threads.c \
 			$(SRC_DIR)/background_pthread.c \
+			$(SRC_DIR)/routine.c \
+			$(SRC_DIR)/eat.c \
+			$(SRC_DIR)/think.c \
 
 OBJ		= 	$(SRC:%.c=%.o)
 
