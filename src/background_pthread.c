@@ -14,12 +14,10 @@
 
 void	init_background(t_program *table)
 {
-	printf("--- init background ---\n");
 	if (pthread_create(&table->thread_background, NULL, &bg_function, table))
 		exit (EXIT_FAILURE);
 	if (pthread_join(table->thread_background, NULL))
 		exit (EXIT_FAILURE);
-	printf("--- HERE background ---\n");
 }
 
 int	philo_died(t_philo *philo)
@@ -27,11 +25,8 @@ int	philo_died(t_philo *philo)
 	time_t	current_time;
 
 	current_time = get_time_in_ms() - philo->table->start_time;
-	// printf("----HERE = %lu\n", current_time - philo->last_meal);
 	if ((current_time - philo->last_meal) >= philo->table->time_to_die)
-	{
 		return (1);
-	}
 	return (0);
 }
 
@@ -44,11 +39,8 @@ void	*bg_function(void *arg)
 	while (get_time_in_ms() < table->start_time)
 		continue ;
 	i = 0;
-	// printf("----------------------------------------------\n");
-	// printf("table->did_philo_die = %d\n", table->did_philo_die);
 	while (table->did_philo_die == 0)
 	{
-		// usleep(555555);
 		i = 0;
 		while (i < table->nbr_of_philos)
 		{
@@ -63,9 +55,5 @@ void	*bg_function(void *arg)
 			i++;
 		}
 	}
-	printf("--- background ended ---\n");
-	//print massage that one died
-	//exit clean
 	return (NULL);
 }
-

@@ -57,7 +57,4 @@ void	philo_drops_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(&philo->left_fork->m_fork);
 	pthread_mutex_unlock(&philo->right_fork->m_fork);
-	// printf("philo %d dropped forks\n", philo->index);
 }
-
-

@@ -12,7 +12,6 @@
 
 #include "../include/philo.h"
 
-
 /*
 **	The isdigit() function tests for a decimal digit character.
 **	The isdigit() functions return zero if the character tests

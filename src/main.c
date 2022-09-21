@@ -21,6 +21,10 @@ int	main(int ac, char **av)
 	table = init_program(ac, av);
 	table->philos = init_philos(table);
 	run_program(table, table->philos);
-	// free(table);
+	/*
+		free(table);
+		destroy mutex
+		exit clean
+	*/
 	return (0);
 }

@@ -52,10 +52,3 @@ int	run_program(t_program *table, t_philo *philos)
 		return (EXIT_FAILURE);
 	return (0);
 }
-
-// int	end_program(t_program *table, t_philo *philos)
-// {
-// 	if (join_threads(table))
-// 		return (EXIT_FAILURE);
-// 	pthread_mutex_destroy(&table->m_print_msg);
-// }

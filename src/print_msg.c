@@ -29,7 +29,4 @@ void	print_msg(time_t start_time, int philo_id, \
 		if (state_change == THINKING)
 			printf("%lu %d is thinking\n", current_time, philo_id);
 	}
-	if (state_change == DIED)
-		printf("%lu %d died\n", current_time, philo_id);
 }
-
