@@ -12,19 +12,11 @@
 
 #include "../include/philo.h"
 
-pthread_mutex_t	g_mutex;
-
 void	*routine(void *arg)
 {
 	t_philo	*philo;
-	// int		i;
 
-	// i = 0;
 	philo = (t_philo *)arg;
-	// pthread_mutex_init(&philo->right_fork->m_fork, NULL);
-	// pthread_mutex_lock(&g_mutex);
-	// printf("---- HERE ----\n");
-	// pthread_mutex_unlock(&g_mutex);
 	while (get_time_in_ms() < philo->table->start_time)
 		continue ;
 	philo->last_meal = get_time_in_ms() - philo->table->start_time;
