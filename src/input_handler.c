@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:17:11 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/17 09:07:41 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/17 11:21:30 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	input_handler(int ac, char **av)
 		printf("Invalid amount of arguments.\n");
 		return (EXIT_FAILURE);
 	}
-	if (check_if_input_are_digits(ac, av) != 0)
+	if (check_if_input_are_digits(ac, av))
 	{
 		printf("Invalid argument.\n");
 		return (EXIT_FAILURE);
@@ -29,14 +29,14 @@ int	input_handler(int ac, char **av)
 		printf("Invalid integer.\n");
 		return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 int	amt_of_args(int ac)
 {
 	if (ac < 5 || ac > 6)
-		return (INVALID_INPUT);
-	return (0);
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	check_if_input_are_digits(int ac, char **av)
@@ -56,5 +56,23 @@ int	check_if_input_are_digits(int ac, char **av)
 		}
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
+}
+
+int	ft_check_overflow(int ac, char **av)
+{
+	long long	num;
+	int			i;
+
+	i = 1;
+	while (i < ac)
+	{	
+		if (ft_strlen(av[i]) > 11)
+			return (EXIT_FAILURE);
+		num = ft_atoi(av[i]);
+		if (num < -2147483648 || num > 2147483647)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
 }

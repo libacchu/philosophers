@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:18:26 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/12 12:47:55 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/17 11:21:01 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-t_program	*init_program(int ac, char **av)
+int	init_program(int ac, char **av, t_program	*table)
 {
-	t_program	*table;
-
-	table = malloc(sizeof(t_program));
-	if (!table)
-		return (NULL);
 	table->nbr_of_philos = ft_atoi(av[1]);
+	if (table->nbr_of_philos < 1)
+	{
+		printf("Invalid argument.\n");
+		return (EXIT_FAILURE);
+	}
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
 	table->time_to_sleep = ft_atoi(av[4]);
@@ -28,8 +28,11 @@ t_program	*init_program(int ac, char **av)
 	else
 		table->nbr_of_times_to_eat = -1;
 	table->did_philo_die = 0;
+	table->start_time = 0;
 	table->forks = init_forks(table);
-	return (table);
+	if (!table->forks)
+		return (EXIT_FAILURE);
+	return (0);
 }
 
 t_fork	*init_forks(t_program *table)
@@ -51,21 +54,20 @@ t_fork	*init_forks(t_program *table)
 	return (forks);
 }
 
-t_philo	*init_philos(t_program *table)
+int	init_philos(t_program *table)
 {
-	t_philo		*philos;
 	int			i;
 
-	philos = malloc(sizeof(t_philo) * table->nbr_of_philos);
-	if (!philos)
-		return (0);
+	table->philos = malloc(sizeof(t_philo) * table->nbr_of_philos);
+	if (!table->philos)
+		return (EXIT_FAILURE);
 	i = 0;
 	while (i < table->nbr_of_philos)
 	{
-		philos[i] = populate_one_philo(i + 1, table);
+		table->philos[i] = populate_one_philo(i + 1, table);
 		i++;
 	}
-	return (philos);
+	return (0);
 }
 
 t_philo	populate_one_philo(int index, t_program *table)
