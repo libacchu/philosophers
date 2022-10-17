@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   background_pthread.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:55:46 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/08 21:35:53 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/17 10:08:44 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	init_background(t_program *table)
+int	init_background(t_program *table)
 {
 	if (pthread_create(&table->thread_background, NULL, &bg_function, table))
-		exit (EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	if (pthread_join(table->thread_background, NULL))
-		exit (EXIT_FAILURE);
+		return (EXIT_FAILURE);
+	return (0);
 }
 
 int	philo_died(t_philo *philo)
