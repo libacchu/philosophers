@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:56:05 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/18 09:19:07 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/17 09:35:34 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,6 @@ long	ft_atoi(const char *str)
 		str++;
 	}
 	return (num * sign);
-}
-
-int	ft_check_overflow(int ac, char **av)
-{
-	long long	num;
-	int			i;
-
-	i = 1;
-	while (i < ac)
-	{	
-		if (ft_strlen(av[i]) > 11)
-			return (EXIT_FAILURE);
-		num = ft_atoi(av[i]);
-		if (num < -2147483648 || num > 2147483647)
-			return (EXIT_FAILURE);
-		i++;
-	}
-	return (0);
 }
 
 /*
