@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 12:48:22 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/18 09:19:46 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/17 11:13:24 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include "philo_struct.h"
 
 # define INVALID_INPUT 1
 # define FORK 11
@@ -26,44 +27,9 @@
 # define THINKING 14
 # define DIED 15
 
-typedef struct s_philo	t_philo;
-
-typedef struct s_fork
-{
-	int				id;
-	int				status;
-	pthread_mutex_t	m_fork;
-}	t_fork;
-
-typedef struct s_program
-{
-	int				nbr_of_philos;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				nbr_of_times_to_eat;
-	int				did_philo_die;
-	time_t			start_time;
-	pthread_t		thread_background;
-	pthread_t		*thread;
-	t_philo			*philos;
-	t_fork			*forks;
-	pthread_mutex_t	m_print_msg;
-}	t_program;
-
-typedef struct s_philo
-{
-	int				index;
-	int				last_meal;
-	int				nbr_times_eaten;
-	t_fork			*right_fork;
-	t_fork			*left_fork;
-	t_program		*table;
-}	t_philo;
-
 /*	init_struct.c	*/
-t_program	*init_program(int ac, char **av);
-t_philo		*init_philos(t_program *table);
+int			init_program(int ac, char **av, t_program *table);
+int			init_philos(t_program *table);
 t_philo		populate_one_philo(int index, t_program *table);
 t_fork		*init_forks(t_program *table);
 
@@ -71,6 +37,8 @@ t_fork		*init_forks(t_program *table);
 int			input_handler(int ac, char **av);
 int			amt_of_args(int ac);
 int			check_if_input_are_digits(int ac, char **av);
+int			ft_check_overflow(int ac, char **av);
+int			nbr_of_philos(char **av);
 
 /*	get_time.c	*/
 time_t		get_time_in_ms(void);
@@ -86,12 +54,6 @@ int			philo_eat(t_philo *philo, time_t amt_time_to_eat);
 void		philo_takes_forks(t_philo *philo);
 void		philo_drops_forks(t_philo *philo);
 
-/*	Utils.c	*/
-long		ft_atoi(const char *str);
-int			ft_isdigit(int c);
-int			ft_check_overflow(int ac, char **av);
-size_t		ft_strlen(const char *str);
-
 /*	print_msg.c	*/
 void		print_msg(time_t start_time, int philo_id, \
 			int state_change, t_program *table);
@@ -103,7 +65,12 @@ int			create_threads(t_program *table, t_philo *philos);
 int			join_threads(t_program *table);
 
 /*	background_threads.c	*/
-void		init_background(t_program *table);
+int			init_background(t_program *table);
 void		*bg_function(void *table);
+
+/*	Utils.c	*/
+long		ft_atoi(const char *str);
+int			ft_isdigit(int c);
+size_t		ft_strlen(const char *str);
 
 #endif
