@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:29:07 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/16 13:46:49 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/17 20:11:01 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	print_msg(time_t start_time, int philo_id, \
 	current_time = get_time_in_ms() - start_time;
 	if (table->did_philo_die == 0)
 	{
+		pthread_mutex_lock(&table->m_print_msg);
 		if (state_change == FORK)
 			printf("%lu %d has taken a fork\n", current_time, philo_id);
 		if (state_change == EATING)
@@ -28,5 +29,6 @@ void	print_msg(time_t start_time, int philo_id, \
 			printf("%lu %d is sleeping\n", current_time, philo_id);
 		if (state_change == THINKING)
 			printf("%lu %d is thinking\n", current_time, philo_id);
+		pthread_mutex_unlock(&table->m_print_msg);
 	}
 }

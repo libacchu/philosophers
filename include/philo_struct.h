@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 09:20:09 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/17 09:26:42 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:46:37 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ typedef struct s_program
 	t_philo			*philos;
 	t_fork			*forks;
 	pthread_mutex_t	m_print_msg;
+	pthread_mutex_t	m_death;
+	pthread_mutex_t	m_meal;
+	pthread_mutex_t	m_lock;
 }	t_program;
 
 typedef struct s_philo

@@ -3,17 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+         #
+#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 15:36:46 by libacchu          #+#    #+#              #
-#    Updated: 2022/09/08 20:15:58 by libacchu         ###   ########.fr        #
+#    Updated: 2022/10/18 20:35:31 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	philo
 
 CC		= 	gcc
-CFLAGS	= 	-Wall -Wextra -Wextra -pthread -g
+CFLAGS	= 	-Wall -Wextra -Wextra -pthread -g -fsanitize=thread
+# CFLAGS	= 	-Wall -Wextra -Wextra -pthread -g
 
 SRC_DIR	= 	./src
 SRC		= 	$(SRC_DIR)/main.c \
@@ -28,20 +29,29 @@ SRC		= 	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/routine.c \
 			$(SRC_DIR)/eat.c \
 			$(SRC_DIR)/think.c \
+			$(SRC_DIR)/free.c \
 
-OBJ		= 	$(SRC:%.c=%.o)
+OBJ_DIR	= 	./obj
+OBJ = 		$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p obj
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(OBJ)
+	@if [ -d "$(OBJ_DIR)" ]; then \
+		rm -rf $(OBJ_DIR); \
+		echo "rm -rf $(OBJ_DIR)"; \
+	fi
 
 fclean: clean
-	rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: clean fclean re
+.PHONY: all clean fclean re

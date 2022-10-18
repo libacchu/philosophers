@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:03 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/04 20:59:17 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/18 10:37:38 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	philo_sleep(t_philo *philo, t_program *table)
 	while (get_time_in_ms() < time_to_wake_up)
 	{
 		if (table->did_philo_die)
-			break ;
-		usleep(50);
+			return (1);
+		usleep(10);
 	}
 	return (0);
 }

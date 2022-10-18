@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 15:40:21 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/17 19:00:56 by libacchu         ###   ########.fr       */
+/*   Created: 2022/10/17 18:36:29 by libacchu          #+#    #+#             */
+/*   Updated: 2022/10/17 19:02:51 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(int ac, char **av)
+void	free_and_destroy_forks(t_program *table)
 {
-	t_program	table;
+	int	i;
 
-	if (input_handler(ac, av))
-		return (EXIT_FAILURE);
-	if (init_program(ac, av, &table))
-		return (EXIT_FAILURE);
-	if (init_philos(&table))
-		return (EXIT_FAILURE);
-	if (run_program(&table, (&table)->philos))
-		return (EXIT_FAILURE);
-	ft_free_table(&table);
-	/*
-		free(table);
-		destroy mutex
-		exit clean
-	*/
-	return (0);
+	i = 0;
+	while (i < table->nbr_of_philos)
+	{
+		pthread_mutex_destroy(&table->forks[i].m_fork);
+		i++;
+	}
+	free(table->forks);
+}
+
+void	ft_free_table(t_program *table)
+{
+	if (table->forks)
+		free_and_destroy_forks(table);
+	if (table->philos)
+		free(table->philos);
+	if (table->thread)
+		free(table->thread);
+	pthread_mutex_destroy(&table->m_print_msg);
 }

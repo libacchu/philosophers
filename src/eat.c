@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 12:50:01 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/13 20:43:41 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:01:35 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,22 @@ int	philo_eat(t_philo *philo, time_t amt_time_to_eat)
 	print_msg(philo->table->start_time, philo->index, EATING, philo->table);
 	while (get_time_in_ms() < time_to_stop)
 	{
+		pthread_mutex_lock(&philo->table->m_death);
 		if (philo->table->did_philo_die)
-			break ;
+		{
+			pthread_mutex_unlock(&philo->table->m_death);
+			return (1);
+		}
+		pthread_mutex_unlock(&philo->table->m_death);
 		usleep(10);
 	}
-	philo_drops_forks(philo);
-	philo->last_meal = get_time_in_ms() - philo->table->start_time;
+	pthread_mutex_lock(&philo->table->m_meal);
+	philo->last_meal = (get_time_in_ms() - philo->table->start_time);
 	philo->nbr_times_eaten++;
+	pthread_mutex_unlock(&philo->table->m_meal);
+	philo_drops_forks(philo);
+	if (philo->nbr_times_eaten == philo->table->nbr_of_times_to_eat)
+		return (1);
 	return (0);
 }
 

@@ -42,3 +42,9 @@ Test							Expected Result
 
 ./philo 3 400 100 100 3			No one dies, each philosopher eats at least 3 times.
 ./philo 200 800 200 200 9		No one dies, each philosopher eats at least 9 times.
+
+./philo 4 410 200 200 7 		should stop !
+./philo 4 410 200 200 10 		should stop !
+./philo 4 410 200 200 12 		should stop !
+./philo 4 410 200 200 15 		should stop !
+./philo 2 60 60 60 				a philosopher should die !

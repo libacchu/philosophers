@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 12:12:10 by libacchu          #+#    #+#             */
-/*   Updated: 2022/09/16 12:57:19 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:19:45 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	while (get_time_in_ms() < philo->table->start_time)
 		continue ;
+	pthread_mutex_lock(&philo->table->m_death);
 	philo->last_meal = get_time_in_ms() - philo->table->start_time;
+	pthread_mutex_unlock(&philo->table->m_death);
 	if (philo->index % 2 == 1)
 		philo_think(philo->table, philo);
-	while (philo->table->did_philo_die == 0)
+	while (1)
 	{
 		if (philo_eat(philo, philo->table->time_to_eat))
 			break ;
@@ -33,5 +35,5 @@ void	*routine(void *arg)
 		if (philo_think(philo->table, philo))
 			break ;
 	}
-	return ((void *)philo);
+	return (NULL);
 }

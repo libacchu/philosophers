@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 12:48:22 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/17 11:13:24 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/17 18:59:04 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,8 @@ void		*bg_function(void *table);
 long		ft_atoi(const char *str);
 int			ft_isdigit(int c);
 size_t		ft_strlen(const char *str);
+
+/* free.c */
+void		ft_free_table(t_program *table);
 
 #endif
