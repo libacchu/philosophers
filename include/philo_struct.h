@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 09:20:09 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/18 15:46:37 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:05:40 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_program
 	int				time_to_sleep;
 	int				nbr_of_times_to_eat;
 	int				did_philo_die;
+	int				did_all_eat;
 	time_t			start_time;
 	pthread_t		thread_background;
 	pthread_t		*thread;
@@ -40,7 +41,6 @@ typedef struct s_program
 	pthread_mutex_t	m_print_msg;
 	pthread_mutex_t	m_death;
 	pthread_mutex_t	m_meal;
-	pthread_mutex_t	m_lock;
 }	t_program;
 
 typedef struct s_philo

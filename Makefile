@@ -6,7 +6,7 @@
 #    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 15:36:46 by libacchu          #+#    #+#              #
-#    Updated: 2022/10/18 20:35:31 by libacchu         ###   ########.fr        #
+#    Updated: 2022/10/19 17:04:44 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC		= 	$(SRC_DIR)/main.c \
 			$(SRC_DIR)/eat.c \
 			$(SRC_DIR)/think.c \
 			$(SRC_DIR)/free.c \
+			$(SRC_DIR)/checker.c \
 
 OBJ_DIR	= 	./obj
 OBJ = 		$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))

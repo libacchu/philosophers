@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:40:21 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/17 19:00:56 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:07:03 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,5 @@ int	main(int ac, char **av)
 	if (run_program(&table, (&table)->philos))
 		return (EXIT_FAILURE);
 	ft_free_table(&table);
-	/*
-		free(table);
-		destroy mutex
-		exit clean
-	*/
 	return (0);
 }

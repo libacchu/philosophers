@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:18:26 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/18 15:46:52 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:15:05 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,28 @@ int	init_program(int ac, char **av, t_program	*table)
 	table->time_to_eat = ft_atoi(av[3]);
 	table->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
+	{
 		table->nbr_of_times_to_eat = ft_atoi(av[5]);
+		printf("Invalid argument.\n");
+		return (EXIT_FAILURE);
+	}
 	else
 		table->nbr_of_times_to_eat = -1;
 	table->did_philo_die = 0;
+	table->did_all_eat = 0;
 	table->start_time = 0;
+	if (init_mutexes(table))
+		return (EXIT_FAILURE);
+	return (0);
+}
+
+int	init_mutexes(t_program	*table)
+{
 	table->forks = init_forks(table);
 	if (!table->forks)
 		return (EXIT_FAILURE);
 	pthread_mutex_init(&table->m_death, NULL);
 	pthread_mutex_init(&table->m_meal, NULL);
-	pthread_mutex_init(&table->m_lock, NULL);
 	return (0);
 }
 

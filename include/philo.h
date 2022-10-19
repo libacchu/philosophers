@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 12:48:22 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/17 18:59:04 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:25:57 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int			init_program(int ac, char **av, t_program *table);
 int			init_philos(t_program *table);
 t_philo		populate_one_philo(int index, t_program *table);
 t_fork		*init_forks(t_program *table);
+int			init_mutexes(t_program	*table);
 
 /*	input_handler.c	*/
 int			input_handler(int ac, char **av);
@@ -53,6 +54,8 @@ int			philo_think(t_program *table, t_philo *philo);
 int			philo_eat(t_philo *philo, time_t amt_time_to_eat);
 void		philo_takes_forks(t_philo *philo);
 void		philo_drops_forks(t_philo *philo);
+int			philo_is_eating(t_philo *philo, time_t amt_time_to_eat);
+void		update_meal(t_philo *philo);
 
 /*	print_msg.c	*/
 void		print_msg(time_t start_time, int philo_id, \
@@ -67,6 +70,12 @@ int			join_threads(t_program *table);
 /*	background_threads.c	*/
 int			init_background(t_program *table);
 void		*bg_function(void *table);
+
+/* 	checker.c */
+int			has_a_philo_died(t_philo *philos);
+int			has_all_eaten(t_program	*table);
+int			philo_died(t_philo *philo);
+int			all_eaten(t_program	*table);
 
 /*	Utils.c	*/
 long		ft_atoi(const char *str);

@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 18:06:03 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/18 10:37:38 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:23:40 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,20 @@
 int	philo_sleep(t_philo *philo, t_program *table)
 {
 	time_t	time_to_wake_up;
+	time_t	current_time;
 
-	time_to_wake_up = get_time_in_ms() + table->time_to_sleep;
-	if (table->did_philo_die != 0)
+	current_time = get_time_in_ms() - philo->table->start_time;
+	time_to_wake_up = current_time + table->time_to_sleep;
+	if (has_a_philo_died(philo))
 		return (1);
 	print_msg(table->start_time, philo->index, SLEEPING, table);
-	while (get_time_in_ms() < time_to_wake_up)
+	while ((get_time_in_ms() - philo->table->start_time) < time_to_wake_up)
 	{
-		if (table->did_philo_die)
+		if (has_a_philo_died(philo) == 1)
 			return (1);
-		usleep(10);
+		if (has_all_eaten(philo->table) == 1)
+			return (1);
+		usleep(100);
 	}
 	return (0);
 }

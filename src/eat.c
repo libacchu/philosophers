@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 12:50:01 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/18 20:01:35 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:25:10 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,47 @@
 
 int	philo_eat(t_philo *philo, time_t amt_time_to_eat)
 {
-	time_t	time_to_stop;
-
-	if (philo->table->did_philo_die != 0)
-		return (1);
 	philo_takes_forks(philo);
-	if (philo->table->did_philo_die != 0)
-		return (1);
-	time_to_stop = get_time_in_ms() + amt_time_to_eat;
-	print_msg(philo->table->start_time, philo->index, EATING, philo->table);
-	while (get_time_in_ms() < time_to_stop)
+	if (has_a_philo_died(philo))
 	{
-		pthread_mutex_lock(&philo->table->m_death);
-		if (philo->table->did_philo_die)
+		philo_drops_forks(philo);
+		return (1);
+	}
+	if (philo_is_eating(philo, amt_time_to_eat))
+		return (1);
+	update_meal(philo);
+	philo_drops_forks(philo);
+	if (has_all_eaten(philo->table) == 1)
+		return (1);
+	return (0);
+}
+
+int	philo_is_eating(t_philo *philo, time_t amt_time_to_eat)
+{
+	time_t	time_to_stop;
+	time_t	current_time;
+
+	current_time = get_time_in_ms() - philo->table->start_time;
+	time_to_stop = current_time + amt_time_to_eat;
+	print_msg(philo->table->start_time, philo->index, EATING, philo->table);
+	while ((get_time_in_ms() - philo->table->start_time) < time_to_stop)
+	{
+		if (has_a_philo_died(philo))
 		{
-			pthread_mutex_unlock(&philo->table->m_death);
+			philo_drops_forks(philo);
 			return (1);
 		}
-		pthread_mutex_unlock(&philo->table->m_death);
-		usleep(10);
+		usleep(100);
 	}
+	return (0);
+}
+
+void	update_meal(t_philo *philo)
+{
 	pthread_mutex_lock(&philo->table->m_meal);
 	philo->last_meal = (get_time_in_ms() - philo->table->start_time);
 	philo->nbr_times_eaten++;
 	pthread_mutex_unlock(&philo->table->m_meal);
-	philo_drops_forks(philo);
-	if (philo->nbr_times_eaten == philo->table->nbr_of_times_to_eat)
-		return (1);
-	return (0);
 }
 
 void	philo_takes_forks(t_philo *philo)
