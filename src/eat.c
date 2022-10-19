@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 12:50:01 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 19:25:10 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:40:55 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	philo_eat(t_philo *philo, time_t amt_time_to_eat)
 {
+	if (has_a_philo_died(philo))
+		return (1);
 	philo_takes_forks(philo);
 	if (has_a_philo_died(philo))
 	{

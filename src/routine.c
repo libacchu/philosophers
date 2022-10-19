@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 12:12:10 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 19:10:51 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:37:48 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	*routine(void *arg)
 	pthread_mutex_lock(&philo->table->m_meal);
 	philo->last_meal = get_time_in_ms() - philo->table->start_time;
 	pthread_mutex_unlock(&philo->table->m_meal);
+	if (one_philo(philo->table))
+		return (NULL);
 	if (philo->index % 2 == 1)
 		philo_think(philo->table, philo);
 	while (has_a_philo_died(philo) == 0)

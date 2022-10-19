@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:17:11 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/17 11:21:30 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:53:05 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,18 @@ int	ft_check_overflow(int ac, char **av)
 		i++;
 	}
 	return (EXIT_SUCCESS);
+}
+
+int	nbr_of_times_to_eat(int ac, char **av, t_program *table)
+{
+	if (ac == 6)
+		table->nbr_of_times_to_eat = ft_atoi(av[5]);
+	else
+		table->nbr_of_times_to_eat = -1;
+	if (table->nbr_of_times_to_eat == 0)
+	{
+		printf("Invalid argument.\n");
+		return (EXIT_FAILURE);
+	}
+	return (0);
 }

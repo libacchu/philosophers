@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   background_pthread.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:55:46 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 19:04:41 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:56:31 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@ int	init_background(t_program *table)
 	if (pthread_join(table->thread_background, NULL))
 		return (EXIT_FAILURE);
 	return (0);
+}
+
+void	change_death_status(t_program	*table, int i)
+{
+	pthread_mutex_lock(&table->m_death);
+	table->did_philo_die = 1;
+	pthread_mutex_unlock(&table->m_death);
+	print_msg(table->start_time, i + 1, DIED, table);
 }
 
 void	*bg_function(void *arg)
@@ -37,16 +45,14 @@ void	*bg_function(void *arg)
 		{
 			if (philo_died(&table->philos[i]) == 1)
 			{
-				pthread_mutex_lock(&table->m_death);
-				table->did_philo_die = 1;
-				pthread_mutex_unlock(&table->m_death);
-				print_msg(table->start_time, i + 1, DIED, table);
+				change_death_status(table, i);
 				break ;
 			}
 			i++;
 		}
 		if (all_eaten(table) == 1)
 			break ;
+		usleep(10);
 	}
 	return (NULL);
 }

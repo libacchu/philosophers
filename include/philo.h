@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 12:48:22 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 19:25:57 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:51:33 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int			init_philos(t_program *table);
 t_philo		populate_one_philo(int index, t_program *table);
 t_fork		*init_forks(t_program *table);
 int			init_mutexes(t_program	*table);
+int			nbr_of_times_to_eat(int ac, char **av, t_program *table);
 
 /*	input_handler.c	*/
 int			input_handler(int ac, char **av);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:18:26 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 19:15:05 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/19 19:53:08 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,8 @@ int	init_program(int ac, char **av, t_program	*table)
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
 	table->time_to_sleep = ft_atoi(av[4]);
-	if (ac == 6)
-	{
-		table->nbr_of_times_to_eat = ft_atoi(av[5]);
-		printf("Invalid argument.\n");
-		return (EXIT_FAILURE);
-	}
-	else
-		table->nbr_of_times_to_eat = -1;
+	if (nbr_of_times_to_eat(ac, av, table))
+		return (1);
 	table->did_philo_die = 0;
 	table->did_all_eat = 0;
 	table->start_time = 0;
