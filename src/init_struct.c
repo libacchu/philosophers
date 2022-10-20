@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:18:26 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 19:53:08 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:19:42 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ int	init_mutexes(t_program	*table)
 	table->forks = init_forks(table);
 	if (!table->forks)
 		return (EXIT_FAILURE);
+	pthread_mutex_init(&table->m_print_msg, NULL);
 	pthread_mutex_init(&table->m_death, NULL);
 	pthread_mutex_init(&table->m_meal, NULL);
+	pthread_mutex_init(&table->m_lock, NULL);
 	return (0);
 }
 

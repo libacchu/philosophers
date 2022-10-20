@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+         #
+#    By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 15:36:46 by libacchu          #+#    #+#              #
-#    Updated: 2022/10/19 19:23:52 by libacchu         ###   ########.fr        #
+#    Updated: 2022/10/20 15:27:34 by libacchu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= 	philo
 
 CC		= 	gcc
 # CFLAGS	= 	-Wall -Wextra -Wextra -pthread -g -fsanitize=thread
-CFLAGS	= 	-Wall -Wextra -Wextra -pthread -g
+CFLAGS	= 	-Wall -Wextra -Wextra -pthread -O3
 
 SRC_DIR	= 	./src
 SRC		= 	$(SRC_DIR)/main.c \

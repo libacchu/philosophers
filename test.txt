@@ -41,7 +41,7 @@ Test							Expected Result
 ./philo 1 800 200 200			Philosopher 1 takes a fork and dies at 800 ms.
 
 ./philo 3 400 100 100 3			No one dies, each philosopher eats at least 3 times.
-./philo 200 800 200 200 9		No one dies, each philosopher eats at least 9 times.
+./philo 200 800 200 200 2		No one dies, each philosopher eats at least 9 times.
 
 ./philo 4 410 200 200 7 		should stop !
 ./philo 4 410 200 200 10 		should stop !

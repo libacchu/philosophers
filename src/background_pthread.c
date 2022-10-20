@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   background_pthread.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: libacchu <libacchu@students.42wolfsburg.de +#+  +:+       +#+        */
+/*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:55:46 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 19:56:31 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:40:42 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*bg_function(void *arg)
 		}
 		if (all_eaten(table) == 1)
 			break ;
-		usleep(10);
+		usleep(100);
 	}
 	return (NULL);
 }

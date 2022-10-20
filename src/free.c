@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 18:36:29 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 19:06:23 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:19:57 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ void	ft_free_table(t_program *table)
 	pthread_mutex_destroy(&table->m_print_msg);
 	pthread_mutex_destroy(&table->m_death);
 	pthread_mutex_destroy(&table->m_meal);
+	pthread_mutex_destroy(&table->m_lock);
 }

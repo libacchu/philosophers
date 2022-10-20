@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 09:20:09 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 19:05:40 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:19:24 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_program
 	pthread_mutex_t	m_print_msg;
 	pthread_mutex_t	m_death;
 	pthread_mutex_t	m_meal;
+	pthread_mutex_t	m_lock;
 }	t_program;
 
 typedef struct s_philo
