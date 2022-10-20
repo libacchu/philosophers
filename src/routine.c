@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 12:12:10 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/20 16:05:54 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:23:45 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*routine(void *arg)
 	if (one_philo(philo->table))
 		return (NULL);
 	if (philo->index % 2 == 1)
-		philo_think(philo->table, philo);
+		usleep(philo->table->time_to_sleep * 1000);
 	while (1)
 	{
 		if (philo_eat(philo, philo->table->time_to_eat))
