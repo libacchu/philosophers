@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 21:45:49 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/20 13:57:15 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:06:43 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	run_program(t_program *table, t_philo *philos)
 {
-	table->start_time = get_time_in_ms() /* + (table->nbr_of_philos * 200)*/;
+	table->start_time = get_time_in_ms();
 	table->thread = malloc(sizeof(pthread_t) * table->nbr_of_philos);
 	if (!table->thread)
 		return (EXIT_FAILURE);
@@ -36,9 +36,7 @@ int	create_threads(t_program *table, t_philo *philos)
 	{
 		if (pthread_create(&table->thread[i], NULL, &routine, &philos[i]))
 			return (EXIT_FAILURE);
-		// printf("philo %d created\n", i);
 		i++;
-		// usleep(100);
 	}
 	return (0);
 }
@@ -53,7 +51,6 @@ int	join_threads(t_program *table)
 		if (pthread_join(table->thread[i], NULL))
 			return (EXIT_FAILURE);
 		i++;
-		usleep(100);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:29:50 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/20 14:28:36 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:04:58 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,8 @@ int	philo_died(t_philo *philo)
 	status = 0;
 	current_time = get_time_in_ms() - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->m_meal);
-	// pthread_mutex_lock(&philo->table->m_death);
-	// pthread_mutex_lock(&philo->table->m_lock);
-	
 	if ((current_time - philo->last_meal) >= philo->table->time_to_die)
-	{
-		// philo->table->did_philo_die = 1;
 		status = 1;
-	}
-	// pthread_mutex_unlock(&philo->table->m_lock);
-	// pthread_mutex_unlock(&philo->table->m_death);
 	pthread_mutex_unlock(&philo->table->m_meal);
 	return (status);
 }

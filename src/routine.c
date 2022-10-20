@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 12:12:10 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/20 14:09:23 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:05:54 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (one_philo(philo->table))
 		return (NULL);
-	// while (get_time_in_ms() < philo->table->start_time)
-	// 	usleep(100);
 	if (philo->index % 2 == 1)
-		// usleep(100);
 		philo_think(philo->table, philo);
 	while (1)
 	{

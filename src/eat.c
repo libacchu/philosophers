@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 12:50:01 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/20 15:20:10 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:05:34 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,10 @@ void	update_meal(t_philo *philo)
 
 void	philo_takes_forks(t_philo *philo)
 {
-	// if (philo->index == 1)
-	// {
-	// 	pthread_mutex_lock(&philo->right_fork->m_fork);
-	// 	print_msg(philo->table->start_time, philo->index, FORK, philo->table);
-	// 	pthread_mutex_lock(&philo->left_fork->m_fork);
-	// 	print_msg(philo->table->start_time, philo->index, FORK, philo->table);
-	// }
-	// else
-	// {
-		pthread_mutex_lock(&philo->left_fork->m_fork);
-		print_msg(philo->table->start_time, philo->index, FORK, philo->table);
-		pthread_mutex_lock(&philo->right_fork->m_fork);
-		print_msg(philo->table->start_time, philo->index, FORK, philo->table);
-	// }
+	pthread_mutex_lock(&philo->left_fork->m_fork);
+	print_msg(philo->table->start_time, philo->index, FORK, philo->table);
+	pthread_mutex_lock(&philo->right_fork->m_fork);
+	print_msg(philo->table->start_time, philo->index, FORK, philo->table);
 }
 
 void	philo_drops_forks(t_philo *philo)
