@@ -6,13 +6,13 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:18:26 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/20 14:19:42 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/21 07:45:50 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	init_program(int ac, char **av, t_program	*table)
+int	init_program(int ac, char **av, t_program *table)
 {
 	table->nbr_of_philos = ft_atoi(av[1]);
 	if (table->nbr_of_philos < 1)
@@ -23,6 +23,11 @@ int	init_program(int ac, char **av, t_program	*table)
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
 	table->time_to_sleep = ft_atoi(av[4]);
+	if (!table->time_to_eat || !table->time_to_sleep)
+	{
+		printf("Invalid argument.\n");
+		return (EXIT_FAILURE);
+	}
 	if (nbr_of_times_to_eat(ac, av, table))
 		return (1);
 	table->did_philo_die = 0;

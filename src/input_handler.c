@@ -6,7 +6,7 @@
 /*   By: libacchu <libacchu@students.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 20:17:11 by libacchu          #+#    #+#             */
-/*   Updated: 2022/10/19 21:02:19 by libacchu         ###   ########.fr       */
+/*   Updated: 2022/10/21 07:34:11 by libacchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	input_handler(int ac, char **av)
 {
-	if (amt_of_args(ac) != 0)
+	if (amt_of_args(ac) == 1)
 	{
 		printf("Invalid amount of arguments.\n");
 		return (EXIT_FAILURE);
